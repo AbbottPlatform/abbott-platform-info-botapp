@@ -1,0 +1,23 @@
+{
+  "name": "abbott-platform-info-botapp",
+  "version": "1.0.0",
+  "description": "This is a bot to provide information about the abbott platform and platform projects.",
+  "main": "app.js",
+  "engines": {
+    "node": ">=7.10.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "abbott-client": "node abbott-app-client.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "abbott"
+  ],
+  "author": "Vinicius Patrinhani @ CI&amp;T",
+  "license": "MIT",
+  "dependencies": {
+    "@abbott-platform/abbott-framework": "^1.6.5",
+    "node-env-file": "^0.1.8"
+  }
+}

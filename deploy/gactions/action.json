@@ -1,0 +1,21 @@
+{
+	"actions": [
+      {
+        "description": "Default Welcome Intent",
+        "name": "MAIN",
+        "fulfillment": {
+          "conversationName": "abbott-platform-info"
+        },
+        "intent": {
+          "name": "actions.intent.MAIN"
+        }
+      }
+    ],
+    "conversations": {
+      "abbott-platform-info": {
+        "name": "abbott-platform-info",
+        "url": "https://9a5a90ea.ngrok.io/gactions/receive"
+      }
+    }
+
+}

@@ -1,0 +1,28 @@
+{
+  "generator-abbott": {
+    "promptValues": {
+      "appNameId": "abbott-platform-info-botapp",
+      "appDescription": "This is a bot to provide information about the abbott platform and platform projects.",
+      "projectAuthor": "Vinicius Patrinhani @ CI&T",
+      "projectLicence": "MIT",
+      "botFriendlyName": "Abbott Platform",
+      "nlpProvider": "apiai",
+      "chatPlatforms": [
+        "abbott",
+        "gactions",
+        "gchats",
+        "slack",
+        "facebook"
+      ],
+      "_platform__gactions_projectId": "abbott-platform-info",
+      "_platform__gchats_verify_token": "abbott-platform-info-verify_token",
+      "_platform__gchats_chats_regex": "(^@abbott([:]|\\s))",
+      "_platform__slack_clientId": "478769489161086",
+      "_platform__slack_clientSecret": "3d0b276e11c6c661e9e3a26c3535f807",
+      "_platform__facebook_access_token": "EAAGzcDVUq34BAKOWOvct1KZAYHkzBeCd1nS9AQE8L2VfD1qU42PWtqUGUwXdt5F60hLFsai69an7aVxUvMVH7ii78eqtT41P3e0mIn639WFjA8Ad9M2M3qZA4yVLEOYdahXBZCA1WPEUZCHfg2rMOnd2E6LG288mQkYF0M9jPAZDZD",
+      "_platform__facebook_verify_token": "abbott-platform-info-verify_token",
+      "_platform__facebook_app_secret": "3d0b276e11c6c661e9e3a26c3535f807",
+      "_platform__facebook_validate_requests": true
+    }
+  }
+}
