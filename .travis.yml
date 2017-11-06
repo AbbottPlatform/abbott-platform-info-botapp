@@ -7,8 +7,8 @@ cache:
 branches:
   only: master-ci-travis
 before_deploy:
-  - echo ${ENV_FILE_CONTENT} > env-prd
-  - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
+  - echo $ENV_FILE_CONTENT > env-prd
+  - echo $GOOGLE_CLIENT_SECRET > client-secret.json
   - ls -l
 deploy:
   provider: gae
