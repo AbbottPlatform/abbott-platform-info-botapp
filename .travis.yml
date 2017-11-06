@@ -9,6 +9,7 @@ branches:
 before_deploy:
   - echo ${ENV_FILE_CONTENT} > env-prd
   - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
+  - ls -l
 deploy:
   provider: gae
   keyfile: "client-secret.json"
