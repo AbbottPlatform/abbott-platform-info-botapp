@@ -56,8 +56,10 @@ typings/
 
 # dotenv environment variables file
 .env
+env-*
 
 .data
 
+deployGAE.sh
 deploy/gactions/creds.data
 deploy/gactions/updateActionsGoogle.sh

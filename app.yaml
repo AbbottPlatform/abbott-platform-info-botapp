@@ -1,0 +1,26 @@
+runtime: nodejs
+env: flex
+service: abbott-platform-info-botapp
+
+manual_scaling:
+  instances: 1
+
+env_variables:
+  appName: 'abbott-platform-info-botapp'
+  botFriendlyName: 'Abbott Platform'
+  enable_abbott_engine: true
+  defaultSettings: '{ "adminUserId": "0", "setupCompleted": true }'
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?\..*$
+- ^(.*/)?\.bak$
+- \.tmp/.*
+- \.data/.*
+- \.vscode/.*
+- ^k8s/.*
+- ^Dockerfile$
+- ^docker[-].*$
+- ^.*\.sh$
+- ^apiai_bkp/.*

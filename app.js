@@ -3,7 +3,10 @@ const fs = require('fs');
 if (fs.existsSync(__dirname + '/.env')) {
   const env = require('node-env-file');
   env(__dirname + '/.env');
-}
+} else if (fs.existsSync(__dirname + '/env-prd')) {
+  const env = require('node-env-file');
+  env(__dirname + '/env-prd');
+}  
 
 const { AbbottFramework } = require('@abbott-platform/abbott-framework');
 
