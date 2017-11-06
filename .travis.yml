@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - 7
+cache:
+  directories:
+    - node_modules
+branches:
+  only: master-ci-travis
+before_deploy:
+  - echo ${ENV_FILE_CONTENT} > env-prd
+  - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
+deploy:
+  provider: gae
+  keyfile: "client-secret.json"
+  project: "ciandt-cognitive-sandbox"
+  version: "beta-ci-travis"
+  on:
+    branch: master-ci-travis

@@ -24,3 +24,4 @@ skip_files:
 - ^docker[-].*$
 - ^.*\.sh$
 - ^apiai_bkp/.*
+- ^client-secret.json.*
