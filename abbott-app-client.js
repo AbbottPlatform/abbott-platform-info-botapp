@@ -2,8 +2,11 @@ const fetch = require('node-fetch');
 const readline = require('readline');
 const util = require('util');
 
+// const baseAddress = 'http://localhost:3000';
+const baseAddress = 'https://abbott-platform-info-botapp-dot-ciandt-cognitive-sandbox.appspot.com';
+
 const makeRequest = (message) => {
-  const abbottWebhook = 'http://localhost:3000/abbott/receive?collectPipeData=true';
+  const abbottWebhook = `${baseAddress}/abbott/receive?collectPipeData=true`;
 
   var payload = {
     query: message,
