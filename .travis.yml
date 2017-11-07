@@ -17,5 +17,6 @@ deploy:
   project: ciandt-cognitive-sandbox
   version: beta-ci-travis
   no_stop_previous_version: true
+  verbosity: debug
   on:
     branch: master-ci-travis
