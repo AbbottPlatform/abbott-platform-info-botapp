@@ -3,6 +3,7 @@ const fs = require('fs');
 const envFile = (process.env.envFile) ? process.env.envFile : '.env';
 const envFilePath = `${__dirname}/${envFile}`;
 
+console.log('====> Env file exists: ', fs.existsSync(envFilePath), envFilePath);
 if (fs.existsSync(envFilePath)) {
   const env = require('node-env-file');
   env(envFilePath);
