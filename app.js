@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-if (fs.existsSync(__dirname + '/.env')) {
+const envFile = (process.env.envFile) ? process.env.envFile : '.env';
+const envFilePath = `${__dirname}/${envFile}`;
+
+if (fs.existsSync(envFilePath)) {
   const env = require('node-env-file');
-  env(__dirname + '/.env');
-} else if (fs.existsSync(__dirname + '/env-prd')) {
-  const env = require('node-env-file');
-  env(__dirname + '/env-prd');
-}  
+  env(envFilePath);
+}
 
 const { AbbottFramework } = require('@abbott-platform/abbott-framework');
 
