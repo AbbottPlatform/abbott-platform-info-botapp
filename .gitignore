@@ -56,10 +56,12 @@ typings/
 
 # dotenv environment variables file
 .env
-env-*
+env.prd
 
 .data
 
 deployGAE.sh
+gae_secret.json
 deploy/gactions/creds.data
 deploy/gactions/updateActionsGoogle.sh
+travis-prd_secrets.tar
