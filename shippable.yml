@@ -17,5 +17,5 @@ build:
   ci:
     - shippable_retry npm install
     - npm test
-    - npm run cover-shippable
+    - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --ui=bdd --reporter=xunit-file
     - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
