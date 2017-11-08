@@ -8,8 +8,7 @@ branches:
     - master-ci-shippable
 
 env:
-  - XUNIT_FILE=shippable/testresults/result.xml
-  - secure: v3XXsIbEHJgbfVrFwiXP0JL1d7XyFyQR13OoY/cyB/f6yB59idI9CbzdF4Fovi6NcRrBeM9N99oCyLx85hwsrJPTMUcmHfrBlsNSOMVUhiWdnuySY6DQp8kOUI/Cf6rMsE9pxQsdJssDEpnHa/E2pz5napplxPrgu6h0hFO98Hbg6enpeuTP9zTdprGozorpqKMPrufotKqhrrP7z/Ld8UDgz2F03pbOhePk6Q5JHs4vWgzotbJGCFyUr7u4nEewmBG2venGLYb2eN7RAxpa5YBdDwS+dROuOzBZW67vDKzth6GtIRDsMeWGpeYi9jnJS3/vz77NJ/NtW/J9V8uG7w==
+  - secure: GxZ+7DI/C0MDMTrjFIN8/7oTrLdrsstVjWm1oq4ogWXKWtlMKiW/xbGTYh8IXrrzByUkSa1b5tnJ2c2TdkC2MhTKsVWQZpj8k9Dq/450Uws7nKGIVi4oodI9Y75dhXIXSGnWWj/mcKl3JVD9YM9Af9oN5aYacPKXc0ICrc4B+vWZoIihCesOk5wSHlhSWuOyIGcF0+7io8IcGSqqPlsI41UQd/3NhdgAB/aavmRiJ8Q/D56fVUk1EYEqcL53pZRi34PSML2uYGPz9z+zjqTmaJ/EvdXXgLx9/DrB/rwXFP7RHUib5wG8m3QnhN7/EMdz1qFouWT4mWPcpfWSK3xFTQ==
   
 build:
   cache: true
