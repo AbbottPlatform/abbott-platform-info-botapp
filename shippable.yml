@@ -7,7 +7,16 @@ branches:
   only:
     - master-ci-shippable
 
+env:
+  - XUNIT_FILE=shippable/testresults/result.xml
+  - secure: v3XXsIbEHJgbfVrFwiXP0JL1d7XyFyQR13OoY/cyB/f6yB59idI9CbzdF4Fovi6NcRrBeM9N99oCyLx85hwsrJPTMUcmHfrBlsNSOMVUhiWdnuySY6DQp8kOUI/Cf6rMsE9pxQsdJssDEpnHa/E2pz5napplxPrgu6h0hFO98Hbg6enpeuTP9zTdprGozorpqKMPrufotKqhrrP7z/Ld8UDgz2F03pbOhePk6Q5JHs4vWgzotbJGCFyUr7u4nEewmBG2venGLYb2eN7RAxpa5YBdDwS+dROuOzBZW67vDKzth6GtIRDsMeWGpeYi9jnJS3/vz77NJ/NtW/J9V8uG7w==
+  
 build:
+  cache: true
+  cache_dir_list:
+    - $SHIPPABLE_BUILD_DIR/node_modules
   ci:
-    - npm install
+    - shippable_retry npm install
     - npm test
+    - npm run cover-shippable
+    - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
