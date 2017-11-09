@@ -4,3 +4,6 @@
   - name: tests
     service: app
     command: npm test
+  - name: deploy
+    service: googleclouddeployment
+    command: google-deploy.sh

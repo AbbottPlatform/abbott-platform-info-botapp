@@ -3,3 +3,10 @@ app:
     image: abbott-platform/abbott-platform-info-botapp
     dockerfile_path: Dockerfile
   encrypted_env_file: test/env.encrypted
+  
+googleclouddeployment:
+  image: codeship/google-cloud-deployment
+  encrypted_env_file: google-credentials.encrypted
+  add_docker: true
+  volumes:
+    - ./:/deploy
