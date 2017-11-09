@@ -1,4 +1,5 @@
 - type: serial
+  tag: master-ci-codeship
   steps:
   - name: tests
     service: app
