@@ -1,0 +1,5 @@
+app:
+  build:
+    image: abbott-platform/abbott-platform-info-botapp
+    dockerfile_path: Dockerfile
+  encrypted_env_file: tests/env.encrypted
