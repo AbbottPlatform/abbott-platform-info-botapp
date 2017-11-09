@@ -66,4 +66,5 @@ deploy/gactions/creds.data
 deploy/gactions/updateActionsGoogle.sh
 travis-prd_secrets.tar
 
+.env-codeship
 codeship.aes
