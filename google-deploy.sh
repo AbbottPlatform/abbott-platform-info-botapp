@@ -8,8 +8,8 @@ cd /deploy/
 rm -f Dockerfile
 
 curl -SLO "https://s3.amazonaws.com/codeship-jet-releases/1.19.3/jet-linux_amd64_1.19.3.tar.gz"
-sudo tar -xaC /usr/local/bin -f jet-linux_amd64_1.19.3.tar.gz
-sudo chmod +x /usr/local/bin/jet
+tar -xaC /usr/local/bin -f jet-linux_amd64_1.19.3.tar.gz
+chmod +x /usr/local/bin/jet
 
 /usr/local/bin/jet --help
 
