@@ -3,4 +3,4 @@
   steps:
   - name: tests
     service: app
-    command: bin/ci "npm test"
+    command: npm test
