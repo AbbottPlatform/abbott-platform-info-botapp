@@ -6,4 +6,4 @@
     command: npm test
   - name: deploy
     service: googleclouddeployment
-    command: ls -laR
+    command: ls -la deploy
