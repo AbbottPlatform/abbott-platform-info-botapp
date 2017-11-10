@@ -41,11 +41,11 @@ jobs:
       - run: 
           command: npm run test-circleci
           environment:
-            MOCHA_FILE: ~/junit/test-results.xml
+            MOCHA_FILE: $CIRCLE_TEST_REPORTS/test-results.xml
           when: always
       - store_test_results:
-          path: ~/junit
+          path: $CIRCLE_TEST_REPORTS
       - store_artifacts:
-          path: ~/junit
+          path: $CIRCLE_TEST_REPORTS
 
 
