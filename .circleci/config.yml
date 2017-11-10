@@ -47,9 +47,10 @@ jobs:
     steps:
       # Install Google Cloud SDK
       - run: export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-      - run: echo $GCLOUD_SDK_VERSION
       # Google Cloud SDK is pinned for build reliability. Bump if the SDK complains about deprecation.
       - run: SDK_FILENAME=google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz
+      - run: echo $GCLOUD_SDK_VERSION
+      - run: echo ${SDK_FILENAME}
       - run: curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
       - run: tar -zxvf ${SDK_FILENAME} --directory ${HOME}
       - run: export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
