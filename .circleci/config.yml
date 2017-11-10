@@ -55,7 +55,7 @@ jobs:
             SDK_FILENAME=google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz
             curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
             tar -zxf ${SDK_FILENAME} --directory $HOME
-            export PATH=$PATH:$HOME/google-cloud-sdk/bin
+            echo 'export PATH=$HOME/google-cloud-sdk/bin:$PATH' >> $BASH_ENV
             # Install Google App Engine SDK
             # Install app & dev dependencies, test, deploy, test deployment (--quiet --verbosity=error )
             echo $GOOGLE_CLIENT_SECRET > client-secret.json
