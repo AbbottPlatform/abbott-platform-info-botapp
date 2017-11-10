@@ -8,19 +8,14 @@ general:
     only:
       - master-ci-circleci
 
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:7.10.1
+
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10.1
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+    <<: *defaults
     steps:
       - checkout
 
@@ -37,7 +32,9 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+  test:
+    <<: *defaults
+    steps:
       - run: 
           command: npm run test-circleci
           environment:
@@ -48,4 +45,9 @@ jobs:
       - store_artifacts:
           path: testResults
 
-
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
