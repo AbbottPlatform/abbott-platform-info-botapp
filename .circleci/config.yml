@@ -50,7 +50,7 @@ jobs:
       # Google Cloud SDK is pinned for build reliability. Bump if the SDK complains about deprecation.
       - run: export SDK_FILENAME=google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz
       - run: echo $GCLOUD_SDK_VERSION
-      - run: echo $SDK_FILENAME
+      - run: echo ${SDK_FILENAME}
       - run: echo $HOME
       - run: curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/$SDK_FILENAME
       - run: tar -zxvf $SDK_FILENAME --directory $HOME
