@@ -39,7 +39,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: 
-          command: mocha test/**/*.spec.js --reporter mocha-junit-reporter
+          command: npm run test-circleci
           environment:
             MOCHA_FILE: junit/test-results.xml
           when: always
