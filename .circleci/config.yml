@@ -41,9 +41,11 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - run: ls -la
+      
       - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-        at: /tmp-tst
+          # Must be absolute path or relative path from working_directory
+          at: /tmp-tst
 
       - run: cd /tmp-tst
 
