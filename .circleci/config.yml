@@ -64,8 +64,13 @@ jobs:
           command: gcloud auth activate-service-account --key-file client-secret.json
           when: on_success
       - run:
+          name: Updating app.yaml
+          command: |
+            sed -i -e 's/'"%NLP_APIAI_TOKEN%"'/'"$NLP_APIAI_TOKEN"'/g' app.yaml
+          when: on_success
+      - run:
           name: App Deploy
-          command: gcloud app deploy --project $GOOGLE_PROJECT_ID --version=beta-ci-circleci --no-stop-previous-version
+          command: gcloud app deploy --project $GOOGLE_PROJECT_ID --version=beta-ci-circleci --no-stop-previous-version  --quiet
           when: on_success
 
 workflows:
