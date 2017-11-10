@@ -59,8 +59,14 @@ jobs:
             # Install Google App Engine SDK
             # Install app & dev dependencies, test, deploy, test deployment (--quiet --verbosity=error )
             echo $GOOGLE_CLIENT_SECRET > client-secret.json
-            gcloud auth activate-service-account --key-file client-secret.json
-            gcloud app deploy --project $GOOGLE_PROJECT_ID --version=beta-ci-circleci --no-stop-previous-version
+      - run:
+          name: GCloud Auth
+          command: gcloud auth activate-service-account --key-file client-secret.json
+          when: on_success
+      - run:
+          name: App Deploy
+          command: gcloud app deploy --project $GOOGLE_PROJECT_ID --version=beta-ci-circleci --no-stop-previous-version
+          when: on_success
 
 workflows:
   version: 2
