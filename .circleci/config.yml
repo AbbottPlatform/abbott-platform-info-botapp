@@ -54,7 +54,7 @@ jobs:
             # Google Cloud SDK is pinned for build reliability. Bump if the SDK complains about deprecation.
             SDK_FILENAME=google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz
             curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
-            tar -zxvf ${SDK_FILENAME} --directory $HOME
+            tar -zxf ${SDK_FILENAME} --directory $HOME
             export PATH=$PATH:$HOME/google-cloud-sdk/bin
             # Install Google App Engine SDK
             # Install app & dev dependencies, test, deploy, test deployment (--quiet --verbosity=error )
