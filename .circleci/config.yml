@@ -17,6 +17,9 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - run: mkdir -p workspace
+      - run: cd workspace
+
       - checkout
 
       # Download and cache dependencies
@@ -32,9 +35,19 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+        # Must be an absolute path, or relative path from working_directory
+        root: workspace
   test:
     <<: *defaults
     steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+        at: /tmp-tst/workspace
+
+      - run: cd /tmp-tst/workspace
+
       - run: 
           command: npm run test-circleci
           environment:
