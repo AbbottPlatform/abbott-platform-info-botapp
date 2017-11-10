@@ -35,9 +35,9 @@ jobs:
 
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
-          root: .
+          root: ~/repo
           paths:
-            - /**/*
+            - ./*
   test:
     <<: *defaults
     steps:
