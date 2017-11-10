@@ -17,9 +17,6 @@ jobs:
   build:
     <<: *defaults
     steps:
-      - run: mkdir -p workspace
-      - run: cd workspace
-
       - checkout
 
       # Download and cache dependencies
@@ -38,15 +35,17 @@ jobs:
 
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
-          root: workspace
+          root: .
+          paths:
+            - /**/*
   test:
     <<: *defaults
     steps:
       - attach_workspace:
         # Must be absolute path or relative path from working_directory
-        at: /tmp-tst/workspace
+        at: /tmp-tst
 
-      - run: cd /tmp-tst/workspace
+      - run: cd /tmp-tst
 
       - run: 
           command: npm run test-circleci
