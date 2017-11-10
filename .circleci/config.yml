@@ -45,17 +45,16 @@ jobs:
   deploy:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Install GCloud SDK
           command: |
             export CLOUDSDK_CORE_DISABLE_PROMPTS=1
             # Google Cloud SDK is pinned for build reliability. Bump if the SDK complains about deprecation.
-            export SDK_FILENAME=google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz
-            echo $GCLOUD_SDK_VERSION
-            echo ${SDK_FILENAME}
-            echo $HOME
-            curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/$SDK_FILENAME
-            tar -zxvf $SDK_FILENAME --directory $HOME
+            SDK_FILENAME=google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz
+            curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
+            tar -zxvf ${SDK_FILENAME} --directory $HOME
             export PATH=$PATH:$HOME/google-cloud-sdk/bin
             # Install Google App Engine SDK
             # Install app & dev dependencies, test, deploy, test deployment (--quiet --verbosity=error )
