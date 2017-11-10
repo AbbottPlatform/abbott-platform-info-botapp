@@ -37,11 +37,15 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-          
-      test:
-        override:
-          - npm run test-circleci:
-              environment:
-                MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+
+      - run: 
+          command: npm test
+          environment:
+            MOCHA_FILE: junit/test-results.xml
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
 
 
