@@ -10,8 +10,7 @@
     "start": "node app.js",
     "abbott-client": "node abbott-app-client.js",
     "test": "mocha test/**/*.spec.js",
-    "cover": "istanbul cover _mocha test/**/*.spec.js",
-    "cover-shippable": "istanbul cover _mocha test/**/*.spec.js --ui=bdd --reporter=xunit-file"
+    "cover": "istanbul cover _mocha test/**/*.spec.js"
   },
   "keywords": [
     "abbott"
