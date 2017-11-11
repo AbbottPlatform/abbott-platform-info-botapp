@@ -52,6 +52,25 @@ describe('[en] Dialog - SmallTalk', function () {
         .then(() => done());
     });
 
+    it('Bye', function (done) {
+      let userSays = [ 'Bye', 'Goodbye', 'see you', 'bye-bye' ];
+
+      this.timeout(2000 * userSays.length);
+
+      let promises = userSays.map((say) => {
+        return abbottRequest(say)
+        .then((res) => {
+          res.message.pipeData.nlp.apiai.intents.should.have.lengthOf(1);
+          
+          expect(res.message.pipeData.nlp.apiai.intents[0].intentName).to.equal('smalltalk.greetings.bye');
+          expect(res.message.pipeData.nlp.apiai.intents[0].score).to.be.above(0.6);
+        });
+      });
+
+      Promise.all(promises)
+        .then(() => done());
+    });
+
   });
 
 });
