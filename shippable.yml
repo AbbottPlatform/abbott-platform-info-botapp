@@ -8,6 +8,11 @@ branches:
     - master-ci-shippable
 
 env:
+  global:
+  - TEST_RESULTS_DIR=$SHIPPABLE_REPO_DIR/shippable/testresults
+  - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
+  - TESTS_LOC_DIR=$SHIPPABLE_REPO_DIR/test
+  - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
   - secure: GxZ+7DI/C0MDMTrjFIN8/7oTrLdrsstVjWm1oq4ogWXKWtlMKiW/xbGTYh8IXrrzByUkSa1b5tnJ2c2TdkC2MhTKsVWQZpj8k9Dq/450Uws7nKGIVi4oodI9Y75dhXIXSGnWWj/mcKl3JVD9YM9Af9oN5aYacPKXc0ICrc4B+vWZoIihCesOk5wSHlhSWuOyIGcF0+7io8IcGSqqPlsI41UQd/3NhdgAB/aavmRiJ8Q/D56fVUk1EYEqcL53pZRi34PSML2uYGPz9z+zjqTmaJ/EvdXXgLx9/DrB/rwXFP7RHUib5wG8m3QnhN7/EMdz1qFouWT4mWPcpfWSK3xFTQ==
   
 build:
@@ -16,6 +21,9 @@ build:
     - $SHIPPABLE_BUILD_DIR/node_modules
   ci:
     - shippable_retry npm install
-    - npm test
-    - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --ui=bdd --reporter=xunit-file
-    - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage/
+    - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
+    - pushd $TESTS_LOC_DIR
+    - $MOD_LOC/mocha --recursive "$TESTS_LOC_DIR/**/*.spec.js" -R mocha-junit-reporter --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
+    - $MOD_LOC/istanbul --include-all-sources cover $MOD_LOC/_mocha -- --ui=bdd --reporter=xunit-file
+    - $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
+    - popd
