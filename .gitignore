@@ -67,3 +67,7 @@ gae_secret.json
 deploy/gactions/creds.data
 deploy/gactions/updateActionsGoogle.sh
 travis-prd_secrets.tar
+
+.env-codeship
+.env-google-credentials
+codeship.aes

@@ -1,0 +1,9 @@
+- type: serial
+  tag: master-ci-codeship
+  steps:
+  - name: tests
+    service: app
+    command: npm test
+  - name: deploy
+    service: googleclouddeployment
+    command: ./deploy/google-deploy.sh
