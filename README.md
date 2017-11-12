@@ -5,5 +5,5 @@ Abbott App to provide infos about the platform through different channels.
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/AbbottPlatform/abbott-platform-info-botapp?branch=master)](https://bettercodehub.com/)
 
-# CircleCI
-[![CircleCI](https://circleci.com/gh/AbbottPlatform/abbott-platform-info-botapp/tree/master-ci-circleci.svg?style=svg)](https://circleci.com/gh/AbbottPlatform/abbott-platform-info-botapp/tree/master-ci-circleci)
+# Codeship 
+[ ![Codeship Status for AbbottPlatform/abbott-platform-info-botapp](https://app.codeship.com/projects/e0ea9110-a7a0-0135-0b64-5efbcef9ac92/status?branch=master-ci-codeship)](https://app.codeship.com/projects/255873)
