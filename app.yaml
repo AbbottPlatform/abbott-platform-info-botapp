@@ -12,7 +12,7 @@ env_variables:
   defaultSettings: '{ "adminUserId": "0", "setupCompleted": true }'
   ABBOTT_LOG_LEVEL: 'error'
   ABBOTT_HOSTADDRESS: 'https://abbott-platform-info-botapp-dot-ciandt-cognitive-sandbox.appspot.com'
-  NLP_APIAI_TOKEN: %NLP_APIAI_TOKEN%
+  NLP_APIAI_TOKEN: '%NLP_APIAI_TOKEN%'
 
 skip_files:
 - ^(.*/)?#.*#$
