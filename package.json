@@ -10,7 +10,6 @@
     "start": "node app.js",
     "abbott-client": "node abbott-app-client.js",
     "test": "mocha test/**/*.spec.js",
-    "test-circleci": "mocha test/**/*.spec.js --reporter mocha-junit-reporter",
     "cover": "istanbul cover _mocha test/**/*.spec.js"
   },
   "keywords": [
