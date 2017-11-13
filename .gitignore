@@ -57,6 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 env.prd
+.env-*
+*.aes
 
 .data
 
