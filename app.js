@@ -21,4 +21,4 @@ const abbottFramework = new AbbottFramework(abbottConfig);
 
 abbottFramework.start();
 
-console.log('Abbott Framework Initialized! (1.0.0)');
+console.log('Abbott Framework Initialized! (1.0.1)');
