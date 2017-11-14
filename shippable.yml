@@ -223,7 +223,7 @@ jobs:
     type: manifest
     steps:
       - IN: abbott-platform-info-botapp-img-gke
-        versionName: "master-ci-shippable-gke.9"
+        versionName: "$ABBOTTPLATFORMINFOBOTAPPIMGGKE_VERSIONNAME"
       - IN: abbott-platform-info-botapp-img-options-gke-test
       - TASK: managed
     flags:
