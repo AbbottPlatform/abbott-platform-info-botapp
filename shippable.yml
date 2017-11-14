@@ -5,7 +5,7 @@ node_js:
 
 branches:
   only:
-    - master-ci-shippable
+    - master-ci-shippable-gke
 
 env:
   global:
