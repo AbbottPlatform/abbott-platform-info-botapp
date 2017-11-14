@@ -22,6 +22,7 @@ skip_files:
 - \.tmp/.*
 - \.data/.*
 - \.vscode/.*
+- \.shippable/.*
 - ^k8s/.*
 - ^Dockerfile$
 - ^docker[-].*$
