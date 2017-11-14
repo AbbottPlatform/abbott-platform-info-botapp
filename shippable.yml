@@ -220,7 +220,7 @@ jobs:
   ###################################
   # runCI job to update the image tag
   ###################################
-  - name: abbott-platform-info-botapp-env_runCI
+  - name: abbott-platform-info-botapp_runCI
     type: runCI
     steps:
       - IN: abbott-platform-info-botapp_ciRepo
