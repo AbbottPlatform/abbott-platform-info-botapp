@@ -85,7 +85,7 @@ resources:
       sourceName: gcr.io/ciandt-cognitive-sandbox/abbott-platform-info-botapp # replace namespace name with your Google Cloud project name
       isPull: false
     seed:
-      versionName: master-ci-shippable-gke.1
+      versionName: master-ci-shippable-gke.11
     flags:
       - gke-loadbalancer
 
@@ -223,7 +223,6 @@ jobs:
     type: manifest
     steps:
       - IN: abbott-platform-info-botapp-img-gke
-        versionName: "$ABBOTTPLATFORMINFOBOTAPPIMGGKE_VERSIONNAME"
       - IN: abbott-platform-info-botapp-img-options-gke-test
       - TASK: managed
     flags:
