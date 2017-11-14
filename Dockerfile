@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 80
 
-ENTRYPOINT ["/nodejs/bin/npm", "start"]
+ENTRYPOINT ["npm", "start"]
