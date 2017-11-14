@@ -57,7 +57,7 @@ integrations:
         - versionName=$BRANCH.$BUILD_NUMBER
       branches:
         only:
-          - master
+          - master-ci-shippable-gke
       on_success: always
       on_failure: never
       on_start: never
@@ -222,10 +222,10 @@ jobs:
   ###################################
   - name: abbott-platform-info-botapp-env_runCI
     type: runCI
-    flags:
-      - gke-loadbalancer
     steps:
       - OUT: abbott-platform-info-botapp-img-gke
+    flags:
+      - gke-loadbalancer
 
 # add pipeline workflow
 
