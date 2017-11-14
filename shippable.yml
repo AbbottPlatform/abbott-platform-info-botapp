@@ -32,7 +32,7 @@ build:
   post_ci:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
-    - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/ABBOTTPLATFORMINFOBOTAPPIMGGKE.env
+    - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
 
 integrations:
   hub:
@@ -86,7 +86,7 @@ resources:
       sourceName: gcr.io/ciandt-cognitive-sandbox/abbott-platform-info-botapp # replace namespace name with your Google Cloud project name
       isPull: false
     seed:
-      versionName: master-ci-shippable-gke.11
+      versionName: "master-ci-shippable-gke.1"
     flags:
       - gke-loadbalancer
 
@@ -216,6 +216,16 @@ jobs:
 # jobs for the sample node app pipeline from CI thru TEST environment
 
 ################################
+
+  ###################################
+  # runCI job to update the image tag
+  ###################################
+  - name: abbott-platform-info-botapp-env_runCI
+    type: runCI
+    flags:
+      - gke-loadbalancer
+    steps:
+      - OUT: abbott-platform-info-botapp-img-gke
 
 # add pipeline workflow
 
