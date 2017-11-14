@@ -30,8 +30,9 @@ build:
     - $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
     - popd
   post_ci:
-    - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
-    - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
+    - gcloud docker -- --version
+    # - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
+    # - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
 
 integrations:
   hub:
