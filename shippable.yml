@@ -51,16 +51,16 @@ integrations:
     # Sending webhook to notify Shippable pipeline of new image tag available 
     # http://docs.shippable.com/tutorials/pipelines/connectingCiPipelines/
     # UNCOMMENT LINES BELOW THIS AFTER ADDING PIPELINE TO SPOG VIEW 
-    - integrationName: abbott-platform-info-botapp-trigger-img-gke
-      type: webhook
-      payload:
-        - versionName=$BRANCH.$BUILD_NUMBER
-      branches:
-        only:
-          - master-ci-shippable-gke
-      on_success: always
-      on_failure: never
-      on_start: never
+    # - integrationName: abbott-platform-info-botapp-trigger-img-gke
+    #   type: webhook
+    #   payload:
+    #     - versionName=$BRANCH.$BUILD_NUMBER
+    #   branches:
+    #     only:
+    #       - master-ci-shippable-gke
+    #   on_success: always
+    #   on_failure: never
+    #   on_start: never
 
 resources:
 # add infrastructure resources
@@ -220,12 +220,12 @@ jobs:
   ###################################
   # runCI job to update the image tag
   ###################################
-  # - name: abbott-platform-info-botapp-env_runCI
-  #   type: runCI
-  #   steps:
-  #     - OUT: abbott-platform-info-botapp-img-gke
-  #   flags:
-  #     - gke-loadbalancer
+  - name: abbott-platform-info-botapp-env_runCI
+    type: runCI
+    steps:
+      - OUT: abbott-platform-info-botapp-img-gke
+    flags:
+      - gke-loadbalancer
 
 # add pipeline workflow
 
