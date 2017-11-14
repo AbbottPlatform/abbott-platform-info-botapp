@@ -220,15 +220,15 @@ jobs:
   ###################################
   # runCI job to update the image tag
   ###################################
-  # - name: abbott-platform-info-botapp_runCI
-  #   type: runCI
-  #   steps:
-  #     # - IN: abbott-platform-info-botapp_ciRepo
-  #     #   switch: off
-  #     # - IN: abbott-platform-info-botapp_runCI
-  #     - OUT: abbott-platform-info-botapp-img-gke
-  #   flags:
-  #     - gke-loadbalancer
+  - name: abbott-platform-info-botapp_runCI
+    type: runCI
+    steps:
+      # - IN: abbott-platform-info-botapp_ciRepo
+      #   switch: off
+      # - IN: abbott-platform-info-botapp_runCI
+      - OUT: abbott-platform-info-botapp-img-gke
+    flags:
+      - gke-loadbalancer
 
 # add pipeline workflow
 
