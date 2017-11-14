@@ -1,0 +1,75 @@
+jobs:
+
+# jobs for the sample node app pipeline from CI thru TEST environment
+
+################################
+
+# add pipeline workflow
+
+# manifest gen for VISUALIZER
+  - name: abbott-platform-info-botapp-manifest-gke
+    type: manifest
+    steps:
+      - IN: abbott-platform-info-botapp-img-gke
+      - IN: abbott-platform-info-botapp-img-options-gke-test
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# TEST deployment to Google GKE
+  - name: abbott-platform-info-botapp-deploy-gke-test
+    type: deploy
+    steps:
+      - IN: abbott-platform-info-botapp-manifest-gke
+      - IN: abbott-platform-info-botapp-params-gke-test
+      - IN: abbott-platform-info-botapp-cluster-gke
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# Create external loadBalancer entrypoint for test service
+  - name: abbott-platform-info-botapp-service-gke-test
+    type: provision
+    steps:
+      - IN: abbott-platform-info-botapp-service-test
+      - IN: abbott-platform-info-botapp-deploy-gke-test
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# # Create release for PROD
+#   - name: abbott-platform-info-botapp-release-gke
+#     type: release
+#     steps:
+#       - IN: abbott-platform-info-botapp-version-gke
+#         switch: off
+#       - IN: abbott-platform-info-botapp-deploy-gke-test
+#         switch: off
+#       - TASK:   managed
+#         bump: patch
+#   flags:
+#     - gke-loadbalancer
+
+# PROD deployment to Google GKE
+  - name: abbott-platform-info-botapp-deploy-gke-prod
+    type: deploy
+    steps:
+      - IN: abbott-platform-info-botapp-deploy-gke-test
+        switch: off
+      - IN: abbott-platform-info-botapp-params-gke-prod
+      - IN: abbott-platform-info-botapp-img-options-gke-prod
+      - IN: abbott-platform-info-botapp-replicas-gke-prod
+      - IN: abbott-platform-info-botapp-cluster-gke
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# Create external loadBalancer entrypoint for prod service
+  - name: abbott-platform-info-botapp-service-gke-prod
+    type: provision
+    steps:
+      - IN: abbott-platform-info-botapp-service-prod
+      - IN: abbott-platform-info-botapp-deploy-gke-prod
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
