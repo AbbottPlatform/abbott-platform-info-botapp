@@ -39,4 +39,4 @@ build:
     - echo $GOOGLE_CLIENT_SECRET > client-secret.json
     - gcloud auth activate-service-account --key-file client-secret.json
     - sed -i -e 's/'"%NLP_APIAI_TOKEN%"'/'"$NLP_APIAI_TOKEN"'/g' app.yaml
-    - gcloud app deploy --project $GOOGLE_PROJECT_ID --version=beta-ci-shippable --no-stop-previous-version  --quiet
+    - gcloud app deploy --project $GOOGLE_PROJECT_ID --version=ci-shippable --no-stop-previous-version  --quiet
