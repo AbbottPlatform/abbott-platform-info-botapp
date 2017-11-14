@@ -84,8 +84,8 @@ resources:
     pointer:
       sourceName: gcr.io/ciandt-cognitive-sandbox/abbott-platform-info-botapp # replace namespace name with your Google Cloud project name
       isPull: false
-    # seed:
-    #   versionName: $BRANCH.$BUILD_NUMBER
+    seed:
+      versionName: "$BRANCH.$BUILD_NUMBER"
     flags:
       - gke-loadbalancer
 
