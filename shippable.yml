@@ -33,8 +33,8 @@ build:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
     - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
-    - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke-test.env
-    - echo "NLP_APIAI_TOKEN=$NLP_APIAI_TOKEN" >> $JOB_STATE/abbott-platform-info-botapp-params-gke-test.env
+    - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke.env
+    - echo "NLP_APIAI_TOKEN=$NLP_APIAI_TOKEN" >> $JOB_STATE/abbott-platform-info-botapp-params-gke.env
 
 integrations:
   hub:
@@ -110,21 +110,29 @@ resources:
         env: test
     flags:
       - gke-loadbalancer
+  
+  # env vars for ALL Envs
+  - name: abbott-platform-info-botapp-params-gke
+    type: params
+    version:
+      params:
+        PORT: 80
+        NLP_APIAI_TOKEN: '$NLP_APIAI_TOKEN'
+        CI_VERSION: '$CI_VERSION'
+    flags:
+      - gke-loadbalancer
 
-# env vars for Test
+  # env vars for Test
   - name: abbott-platform-info-botapp-params-gke-test
     type: params
     version:
       params:
         ENVIRONMENT: "TEST"
-        PORT: 80
         ABBOTT_LOG_LEVEL: "info"
-        NLP_APIAI_TOKEN: '$NLP_APIAI_TOKEN'
-        CI_VERSION: '$BUILD_NUMBER'
     flags:
       - gke-loadbalancer
 
-# GKE service/load balancer for TEST
+  # GKE service/load balancer for TEST
   - name: abbott-platform-info-botapp-service-test
     type: loadBalancer
     integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
@@ -177,10 +185,7 @@ resources:
     version:
       params:
         ENVIRONMENT: "PROD"
-        PORT: 80
         ABBOTT_LOG_LEVEL: "error"
-        NLP_APIAI_TOKEN: '$NLP_APIAI_TOKEN'
-        CI_VERSION: '$BUILD_NUMBER'
     flags:
       - gke-loadbalancer
 
@@ -231,7 +236,7 @@ jobs:
       #   switch: off
       # - IN: abbott-platform-info-botapp_runCI
       - OUT: abbott-platform-info-botapp-img-gke
-      - OUT: abbott-platform-info-botapp-params-gke-test
+      - OUT: abbott-platform-info-botapp-params-gke
     flags:
       - gke-loadbalancer
 
@@ -256,6 +261,7 @@ jobs:
     # stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
     steps:
       - IN: abbott-platform-info-botapp-manifest-gke
+      - IN: abbott-platform-info-botapp-params-gke
       - IN: abbott-platform-info-botapp-params-gke-test
       - IN: abbott-platform-info-botapp-cluster-gke
       - TASK: managed
@@ -294,6 +300,7 @@ jobs:
     steps:
       - IN: abbott-platform-info-botapp-deploy-gke-test
         switch: off
+      - IN: abbott-platform-info-botapp-params-gke
       - IN: abbott-platform-info-botapp-params-gke-prod
       - IN: abbott-platform-info-botapp-img-options-gke-prod
       - IN: abbott-platform-info-botapp-replicas-gke-prod
