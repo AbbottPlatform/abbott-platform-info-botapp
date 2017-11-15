@@ -22,5 +22,6 @@ const abbottFramework = new AbbottFramework(abbottConfig);
 abbottFramework.start();
 
 let version = process.env.CI_VERSION || 'x';
+let apiaiToken = (process.env.NLP_APIAI_TOKEN) ? process.env.NLP_APIAI_TOKEN.substr(0, 4) : 'XXXX';
 
-console.log(`Abbott Framework Initialized! (1.0.${version})`);
+console.log(`Abbott Framework Initialized! (1.0.${version}) - (${apiaiToken})`);
