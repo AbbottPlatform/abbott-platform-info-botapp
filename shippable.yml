@@ -33,7 +33,7 @@ build:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
     - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
-    - echo "BUILD_NUMBER=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke-test.env
+    - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke-test.env
 
 integrations:
   hub:
