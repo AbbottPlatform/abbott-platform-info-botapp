@@ -33,7 +33,6 @@ build:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
     - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
-    - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke-test.env
 
 integrations:
   hub:
@@ -118,8 +117,8 @@ resources:
         ENVIRONMENT: "TEST"
         PORT: 80
         ABBOTT_LOG_LEVEL: "info"
-        NLP_APIAI_TOKEN: "$NLP_APIAI_TOKEN"
-        CI_VERSION: "$CI_VERSION"
+        NLP_APIAI_TOKEN: '$NLP_APIAI_TOKEN'
+        CI_VERSION: '$BUILD_NUMBER'
     flags:
       - gke-loadbalancer
 
@@ -178,8 +177,8 @@ resources:
         ENVIRONMENT: "PROD"
         PORT: 80
         ABBOTT_LOG_LEVEL: "error"
-        NLP_APIAI_TOKEN: "$NLP_APIAI_TOKEN"
-        CI_VERSION: "$BUILD_NUMBER"
+        NLP_APIAI_TOKEN: '$NLP_APIAI_TOKEN'
+        CI_VERSION: '$BUILD_NUMBER'
     flags:
       - gke-loadbalancer
 
@@ -230,7 +229,6 @@ jobs:
       #   switch: off
       # - IN: abbott-platform-info-botapp_runCI
       - OUT: abbott-platform-info-botapp-img-gke
-      - OUT: abbott-platform-info-botapp-params-gke-test
     flags:
       - gke-loadbalancer
 
