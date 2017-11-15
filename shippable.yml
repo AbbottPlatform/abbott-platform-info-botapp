@@ -118,6 +118,7 @@ resources:
         PORT: 80
         ABBOTT_LOG_LEVEL: "info"
         NLP_APIAI_TOKEN: "$NLP_APIAI_TOKEN"
+        CI_VERSION: "$BUILD_NUMBER"
     flags:
       - gke-loadbalancer
 
@@ -177,6 +178,7 @@ resources:
         PORT: 80
         ABBOTT_LOG_LEVEL: "error"
         NLP_APIAI_TOKEN: "$NLP_APIAI_TOKEN"
+        CI_VERSION: "$BUILD_NUMBER"
     flags:
       - gke-loadbalancer
 
