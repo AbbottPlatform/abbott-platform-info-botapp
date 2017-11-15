@@ -33,6 +33,7 @@ build:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
     - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
+    - echo "BUILD_NUMBER=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke-test.env
 
 integrations:
   hub:
@@ -229,6 +230,7 @@ jobs:
       #   switch: off
       # - IN: abbott-platform-info-botapp_runCI
       - OUT: abbott-platform-info-botapp-img-gke
+      - OUT: abbott-platform-info-botapp-params-gke-test
     flags:
       - gke-loadbalancer
 
@@ -240,7 +242,6 @@ jobs:
     steps:
       - IN: abbott-platform-info-botapp-img-gke
       - IN: abbott-platform-info-botapp-img-options-gke-test
-      - IN: abbott-platform-info-botapp-params-gke-test
       - TASK: managed
     flags:
       - gke-loadbalancer
@@ -254,7 +255,7 @@ jobs:
     # stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
     steps:
       - IN: abbott-platform-info-botapp-manifest-gke
-      # - IN: abbott-platform-info-botapp-params-gke-test
+      - IN: abbott-platform-info-botapp-params-gke-test
       - IN: abbott-platform-info-botapp-cluster-gke
       - TASK: managed
     flags:
