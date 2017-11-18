@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 if (fs.existsSync(__dirname + '/.env')) {
   const env = require('node-env-file');
@@ -14,11 +15,17 @@ var abbottConfig = {
   botName: 'abbott-platform-info-botapp',
   port: process.env.PORT || 3000,
   platforms: require('./config/platforms'),
-  nlp: require('./config/nlp')
+  nlp: require('./config/nlp'),
+  webserver: {
+    baseRoutes: [
+      path.join(__dirname, 'routes/health_check')
+    ]
+  }
 };
   
 const abbottFramework = new AbbottFramework(abbottConfig);
 
-abbottFramework.start();
-
-console.log('Abbott Framework Initialized!');
+abbottFramework.start()
+  .then(() => {
+    console.log('Abbott Framework Initialized!');
+  });
