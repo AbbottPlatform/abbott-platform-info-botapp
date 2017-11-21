@@ -100,7 +100,7 @@ resources:
   - name: abbott-platform-info-botapp-img-options-gke-test
     type: dockerOptions
     version:
-      memory: 1024
+      memory: 64
       # cpuShares: 1
       portMappings:
         - 80:80
@@ -141,7 +141,7 @@ resources:
       method: LoadBalancer
       clusterName: abbott-platform-info-botapp # replace with your GKE cluster name
       region: "us-central1-a" # replace with your GKE cluster region
-      namespace: abbott-platform-info-botapp-test # replace with your Google Cloud project name
+      namespace: ciandt-cognitive-sandbox # replace with your Google Cloud project name
     version:
       ports:
         - name: public
@@ -172,8 +172,11 @@ resources:
   - name: abbott-platform-info-botapp-img-options-gke-prod
     type: dockerOptions
     version:
-      memory: 1024
+      memory: 64
       # cpuShares: 1
+      portMappings:
+        - 80:80
+      publishAllPorts : true
       labels: # these labels will be used by the loadBalancer resource
         app: abbott-platform-info-botapp-gke-loadbalancer
         env: prod
@@ -199,7 +202,7 @@ resources:
       method: LoadBalancer
       clusterName: abbott-platform-info-botapp # replace with your GKE cluster name
       region: "us-central1-a" # replace with your GKE cluster region
-      namespace: abbott-platform-info-botapp-prod # replace with your Google Cloud project name
+      namespace: ciandt-cognitive-sandbox # replace with your Google Cloud project name
     version:
       ports:
         - name: public
