@@ -6,6 +6,7 @@ module.exports = function (webserver, router) {
   // GAE Flexible instance requisites
   server.set('trust proxy', true);
   server.use('/_ah/health', require('express-healthcheck')());
+  server.use('/healthz', require('express-healthcheck')());
 
   logger.debug('route loaded!');
 };
