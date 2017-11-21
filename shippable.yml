@@ -146,7 +146,7 @@ resources:
       ports:
         - name: public
           protocol: TCP
-          # port: 80
+          port: 80
           # nodePort: 80
       selector:  # these must match labels set on your image (see dockerOptions)
         app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
@@ -207,7 +207,7 @@ resources:
       ports:
         - name: public
           protocol: TCP
-          # port: 80
+          port: 80
           # nodePort: 80
       selector:   # these must match labels set on your image (see dockerOptions)
         app: abbott-platform-info-botapp-gke-loadbalancer
