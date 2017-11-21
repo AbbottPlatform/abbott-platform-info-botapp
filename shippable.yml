@@ -101,7 +101,7 @@ resources:
     type: dockerOptions
     version:
       memory: 64
-      cpuShares: 128
+      cpuShares: 1
       portMappings:
         - 80:80
       publishAllPorts : true
@@ -172,7 +172,7 @@ resources:
     type: dockerOptions
     version:
       memory: 64
-      cpuShares: 128
+      cpuShares: 1
       labels: # these labels will be used by the loadBalancer resource
         app: abbott-platform-info-botapp-gke-loadbalancer
         env: prod
