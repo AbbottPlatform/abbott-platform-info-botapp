@@ -50,24 +50,10 @@ integrations:
       on_failure: always
       on_pull_request: never
 
-    # Sending webhook to notify Shippable pipeline of new image tag available 
-    # http://docs.shippable.com/tutorials/pipelines/connectingCiPipelines/
-    # UNCOMMENT LINES BELOW THIS AFTER ADDING PIPELINE TO SPOG VIEW 
-    # - integrationName: abbott-platform-info-botapp-trigger-img-gke
-    #   type: webhook
-    #   payload:
-    #     - versionName=$BRANCH.$BUILD_NUMBER
-    #   branches:
-    #     only:
-    #       - master-ci-shippable-gke
-    #   on_success: always
-    #   on_failure: never
-    #   on_start: never
-
 resources:
 # add infrastructure resources
 
-# add env - GKE cluster TEST
+# add GKE cluster
   - name: abbott-platform-info-botapp-cluster-gke
     type: cluster
     integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
@@ -94,10 +80,10 @@ resources:
 
 ################################
 
-# TEST resources
+# Resources
 
 # Docker Image Options
-  - name: abbott-platform-info-botapp-img-options-gke-test
+  - name: abbott-platform-info-botapp-img-options-gke
     type: dockerOptions
     version:
       memory: 64
@@ -107,7 +93,7 @@ resources:
       publishAllPorts : true
       labels:   # these labels will be used by the loadBalancer resource
         app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
-        env: test
+        env: prod
     flags:
       - gke-loadbalancer
   
@@ -122,68 +108,7 @@ resources:
     flags:
       - gke-loadbalancer
 
-  # env vars for Test
-  - name: abbott-platform-info-botapp-params-gke-test
-    type: params
-    version:
-      params:
-        ENVIRONMENT: "TEST"
-        ABBOTT_LOG_LEVEL: "info"
-    flags:
-      - gke-loadbalancer
-
-  # GKE service/load balancer for TEST
-  - name: abbott-platform-info-botapp-service-test
-    type: loadBalancer
-    integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
-    pointer:
-      sourceName: "abbott-platform-info-botapp-service-test"
-      method: LoadBalancer
-      clusterName: abbott-platform-info-botapp # replace with your GKE cluster name
-      region: "us-central1-a" # replace with your GKE cluster region
-      namespace:  abbott-platform-info-botapp-svc-test # replace with your Google Cloud project name
-    version:
-      ports:
-        - name: public
-          protocol: TCP
-          port: 80
-          # nodePort: 80
-      selector:  # these must match labels set on your image (see dockerOptions)
-        app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
-        env: test
-    flags:
-      - gke-loadbalancer
-
-################################
-
-# set service version seed
-  - name: abbott-platform-info-botapp-version-gke
-    type: version
-    seed:
-      versionName: "1.0.0"
-    flags:
-      - gke-loadbalancer
-
-################################
-
-# PROD resources
-
-# Docker Image Options
-  - name: abbott-platform-info-botapp-img-options-gke-prod
-    type: dockerOptions
-    version:
-      memory: 64
-      # cpuShares: 1
-      portMappings:
-        - 80:80
-      publishAllPorts : true
-      labels: # these labels will be used by the loadBalancer resource
-        app: abbott-platform-info-botapp-gke-loadbalancer
-        env: prod
-    flags:
-      - gke-loadbalancer
-
-# env vars for Prod
+  # env vars for Prod
   - name: abbott-platform-info-botapp-params-gke-prod
     type: params
     version:
@@ -193,41 +118,40 @@ resources:
     flags:
       - gke-loadbalancer
 
-# GKE service/load balancer for PROD 
-  - name: abbott-platform-info-botapp-service-prod
+  # GKE service/load balancer
+  - name: abbott-platform-info-botapp-service
     type: loadBalancer
     integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
     pointer:
-      sourceName: "abbott-platform-info-botapp-service-prod"
+      sourceName: "abbott-platform-info-botapp-service"
       method: LoadBalancer
       clusterName: abbott-platform-info-botapp # replace with your GKE cluster name
       region: "us-central1-a" # replace with your GKE cluster region
-      namespace:  abbott-platform-info-botapp-svc-prod # replace with your Google Cloud project name
+      namespace:  abbott-platform-info-botapp-svc # replace with your Google Cloud project name
     version:
       ports:
         - name: public
           protocol: TCP
           port: 80
           # nodePort: 80
-      selector:   # these must match labels set on your image (see dockerOptions)
-        app: abbott-platform-info-botapp-gke-loadbalancer
+      selector:  # these must match labels set on your image (see dockerOptions)
+        app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
         env: prod
     flags:
       - gke-loadbalancer
 
-# PROD replicas
-  - name: abbott-platform-info-botapp-replicas-gke-prod
-    type: replicas
-    version:
-      count: 1
-    flags:
-      - gke-loadbalancer
-
-# ################################
+################################
+# set service version seed used just for release
+  # - name: abbott-platform-info-botapp-version-gke
+  #   type: version
+  #   seed:
+  #     versionName: "1.0.0"
+  #   flags:
+  #     - gke-loadbalancer
+################################
 
 jobs:
-
-# jobs for the sample node app pipeline from CI thru TEST environment
+# jobs for the sample node app pipeline from CI
 
 ################################
 
@@ -249,13 +173,13 @@ jobs:
     type: manifest
     steps:
       - IN: abbott-platform-info-botapp-img-gke
-      - IN: abbott-platform-info-botapp-img-options-gke-test
+      - IN: abbott-platform-info-botapp-img-options-gke
       - TASK: managed
     flags:
       - gke-loadbalancer
 
-# TEST deployment to Google GKE
-  - name: abbott-platform-info-botapp-deploy-gke-test
+# deployment to Google GKE
+  - name: abbott-platform-info-botapp-deploy-gke
     type: deploy
     method: upgrade
     # method: replace
@@ -264,59 +188,18 @@ jobs:
     steps:
       - IN: abbott-platform-info-botapp-manifest-gke
       - IN: abbott-platform-info-botapp-params-gke
-      - IN: abbott-platform-info-botapp-params-gke-test
+      - IN: abbott-platform-info-botapp-params-gke-prod
       - IN: abbott-platform-info-botapp-cluster-gke
       - TASK: managed
     flags:
       - gke-loadbalancer
 
 # Create external loadBalancer entrypoint for test service
-  - name: abbott-platform-info-botapp-service-gke-test
+  - name: abbott-platform-info-botapp-service-gke
     type: provision
     steps:
-      - IN: abbott-platform-info-botapp-service-test
-      - IN: abbott-platform-info-botapp-deploy-gke-test
-      - TASK: managed
-    flags:
-      - gke-loadbalancer
-
-# # Create release for PROD
-#   - name: abbott-platform-info-botapp-release-gke
-#     type: release
-#     steps:
-#       - IN: abbott-platform-info-botapp-version-gke
-#         switch: off
-#       - IN: abbott-platform-info-botapp-deploy-gke-test
-#         switch: off
-#       - TASK:   managed
-#         bump: patch
-#   flags:
-#     - gke-loadbalancer
-
-# PROD deployment to Google GKE
-  - name: abbott-platform-info-botapp-deploy-gke-prod
-    type: deploy
-    method: upgrade
-    # workflow: parallel
-    # stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
-    steps:
-      - IN: abbott-platform-info-botapp-deploy-gke-test
-        switch: off
-      - IN: abbott-platform-info-botapp-params-gke
-      - IN: abbott-platform-info-botapp-params-gke-prod
-      - IN: abbott-platform-info-botapp-img-options-gke-prod
-      - IN: abbott-platform-info-botapp-replicas-gke-prod
-      - IN: abbott-platform-info-botapp-cluster-gke
-      - TASK: managed
-    flags:
-      - gke-loadbalancer
-
-# Create external loadBalancer entrypoint for prod service
-  - name: abbott-platform-info-botapp-service-gke-prod
-    type: provision
-    steps:
-      - IN: abbott-platform-info-botapp-service-prod
-      - IN: abbott-platform-info-botapp-deploy-gke-prod
+      - IN: abbott-platform-info-botapp-service
+      - IN: abbott-platform-info-botapp-deploy-gke
       - TASK: managed
     flags:
       - gke-loadbalancer
