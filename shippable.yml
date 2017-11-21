@@ -1,0 +1,317 @@
+language: node_js
+
+node_js:
+  - 7.10.1
+
+branches:
+  only:
+    - master-ci-shippable-gke
+
+env:
+  global:
+  - TEST_RESULTS_DIR=$SHIPPABLE_REPO_DIR/shippable/testresults
+  - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
+  - TESTS_LOC_DIR=$SHIPPABLE_REPO_DIR/test
+  - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
+  - DOCKER_ACC=gcr.io/ciandt-cognitive-sandbox
+  - DOCKER_REPO=abbott-platform-info-botapp
+  - secure: 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
+  
+build:
+  cache: true
+  cache_dir_list:
+    - $SHIPPABLE_BUILD_DIR/node_modules
+  ci:
+    - shippable_retry npm install
+    - mkdir -p $TEST_RESULTS_DIR && mkdir -p $CODE_COVERAGE_DIR
+    - pushd $TESTS_LOC_DIR
+    - $MOD_LOC/mocha --recursive "$TESTS_LOC_DIR/**/*.spec.js" -R mocha-junit-reporter --reporter-options mochaFile=$TEST_RESULTS_DIR/testresults.xml
+    - $MOD_LOC/istanbul --include-all-sources cover $MOD_LOC/_mocha -- --recursive "$TESTS_LOC_DIR/**/*.spec.js" --ui=bdd -R xunit-file
+    - $MOD_LOC/istanbul report cobertura --dir $CODE_COVERAGE_DIR
+    - popd
+  post_ci:
+    - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
+    - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
+    - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
+    - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke.env
+    - echo "NLP_APIAI_TOKEN=$NLP_APIAI_TOKEN" >> $JOB_STATE/abbott-platform-info-botapp-params-gke.env
+
+integrations:
+  hub:
+    - integrationName: gcr-ciandt-cognitive-sandbox
+      type: gcloudKey
+    # http://docs.shippable.com/ci/shippableyml/#notifications
+  notifications:
+    # turns off email for PR builds, notifies only on failure or change in status
+    # http://docs.shippable.com/integrations/notifications/email/
+    - integrationName: email
+      type: email
+      on_success: change
+      on_failure: always
+      on_pull_request: never
+
+    # Sending webhook to notify Shippable pipeline of new image tag available 
+    # http://docs.shippable.com/tutorials/pipelines/connectingCiPipelines/
+    # UNCOMMENT LINES BELOW THIS AFTER ADDING PIPELINE TO SPOG VIEW 
+    # - integrationName: abbott-platform-info-botapp-trigger-img-gke
+    #   type: webhook
+    #   payload:
+    #     - versionName=$BRANCH.$BUILD_NUMBER
+    #   branches:
+    #     only:
+    #       - master-ci-shippable-gke
+    #   on_success: always
+    #   on_failure: never
+    #   on_start: never
+
+resources:
+# add infrastructure resources
+
+# add env - GKE cluster TEST
+  - name: abbott-platform-info-botapp-cluster-gke
+    type: cluster
+    integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
+    pointer:
+      sourceName : "abbott-platform-info-botapp" # replace with your GKE cluster name
+      region: us-central1-a
+      namespace: "ciandt-cognitive-sandbox" # replace with your Google Cloud project name
+    flags:
+      - gke-loadbalancer
+
+################################
+
+# Docker Image
+  - name: abbott-platform-info-botapp-img-gke
+    type: image
+    integration: gcr-ciandt-cognitive-sandbox # replace with your GCR integration name
+    pointer:
+      sourceName: gcr.io/ciandt-cognitive-sandbox/abbott-platform-info-botapp # replace namespace name with your Google Cloud project name
+      isPull: false
+    seed:
+      versionName: "master-ci-shippable-gke.1"
+    flags:
+      - gke-loadbalancer
+
+################################
+
+# TEST resources
+
+# Docker Image Options
+  - name: abbott-platform-info-botapp-img-options-gke-test
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      portMappings:
+        - 80:80
+      publishAllPorts : true
+      labels:   # these labels will be used by the loadBalancer resource
+        app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
+        env: test
+    flags:
+      - gke-loadbalancer
+  
+  # env vars for ALL Envs
+  - name: abbott-platform-info-botapp-params-gke
+    type: params
+    version:
+      params:
+        PORT: 80
+        NLP_APIAI_TOKEN: '$NLP_APIAI_TOKEN'
+        CI_VERSION: '$CI_VERSION'
+    flags:
+      - gke-loadbalancer
+
+  # env vars for Test
+  - name: abbott-platform-info-botapp-params-gke-test
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "TEST"
+        ABBOTT_LOG_LEVEL: "info"
+    flags:
+      - gke-loadbalancer
+
+  # GKE service/load balancer for TEST
+  - name: abbott-platform-info-botapp-service-test
+    type: loadBalancer
+    integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
+    pointer:
+      sourceName: "abbott-platform-info-botapp-service-test"
+      method: LoadBalancer
+      clusterName: abbott-platform-info-botapp # replace with your GKE cluster name
+      region: "us-central1-a" # replace with your GKE cluster region
+      namespace: ciandt-cognitive-sandbox # replace with your Google Cloud project name
+    version:
+      ports:
+        - name: public
+          protocol: TCP
+          port: 80
+      selector:  # these must match labels set on your image (see dockerOptions)
+        app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
+        env: test
+    flags:
+      - gke-loadbalancer
+
+################################
+
+# set service version seed
+  - name: abbott-platform-info-botapp-version-gke
+    type: version
+    seed:
+      versionName: "1.0.0"
+    flags:
+      - gke-loadbalancer
+
+################################
+
+# PROD resources
+
+# Docker Image Options
+  - name: abbott-platform-info-botapp-img-options-gke-prod
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      labels: # these labels will be used by the loadBalancer resource
+        app: abbott-platform-info-botapp-gke-loadbalancer
+        env: prod
+    flags:
+      - gke-loadbalancer
+
+# env vars for Prod
+  - name: abbott-platform-info-botapp-params-gke-prod
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "PROD"
+        ABBOTT_LOG_LEVEL: "error"
+    flags:
+      - gke-loadbalancer
+
+# GKE service/load balancer for PROD 
+  - name: abbott-platform-info-botapp-service-prod
+    type: loadBalancer
+    integration: gcr-ciandt-cognitive-sandbox # replace with your GKE integration name
+    pointer:
+      sourceName: "abbott-platform-info-botapp-service-prod"
+      method: LoadBalancer
+      clusterName: abbott-platform-info-botapp # replace with your GKE cluster name
+      region: "us-central1-a" # replace with your GKE cluster region
+      namespace: ciandt-cognitive-sandbox # replace with your Google Cloud project name
+    version:
+      ports:
+        - name: public
+          protocol: TCP
+          port: 80
+      selector:   # these must match labels set on your image (see dockerOptions)
+        app: abbott-platform-info-botapp-gke-loadbalancer
+        env: prod
+    flags:
+      - gke-loadbalancer
+
+# PROD replicas
+  - name: abbott-platform-info-botapp-replicas-gke-prod
+    type: replicas
+    version:
+      count: 1
+    flags:
+      - gke-loadbalancer
+
+# ################################
+
+jobs:
+
+# jobs for the sample node app pipeline from CI thru TEST environment
+
+################################
+
+  ###################################
+  # runCI job to update the image tag
+  ###################################
+  - name: abbott-platform-info-botapp_runCI
+    type: runCI
+    steps:
+      - OUT: abbott-platform-info-botapp-img-gke
+      - OUT: abbott-platform-info-botapp-params-gke
+    flags:
+      - gke-loadbalancer
+
+# add pipeline workflow
+
+# manifest gen for VISUALIZER
+  - name: abbott-platform-info-botapp-manifest-gke
+    type: manifest
+    steps:
+      - IN: abbott-platform-info-botapp-img-gke
+      - IN: abbott-platform-info-botapp-img-options-gke-test
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# TEST deployment to Google GKE
+  - name: abbott-platform-info-botapp-deploy-gke-test
+    type: deploy
+    method: upgrade
+    # method: replace
+    # workflow: parallel
+    # stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
+    steps:
+      - IN: abbott-platform-info-botapp-manifest-gke
+      - IN: abbott-platform-info-botapp-params-gke
+      - IN: abbott-platform-info-botapp-params-gke-test
+      - IN: abbott-platform-info-botapp-cluster-gke
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# Create external loadBalancer entrypoint for test service
+  - name: abbott-platform-info-botapp-service-gke-test
+    type: provision
+    steps:
+      - IN: abbott-platform-info-botapp-service-test
+      - IN: abbott-platform-info-botapp-deploy-gke-test
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# # Create release for PROD
+#   - name: abbott-platform-info-botapp-release-gke
+#     type: release
+#     steps:
+#       - IN: abbott-platform-info-botapp-version-gke
+#         switch: off
+#       - IN: abbott-platform-info-botapp-deploy-gke-test
+#         switch: off
+#       - TASK:   managed
+#         bump: patch
+#   flags:
+#     - gke-loadbalancer
+
+# PROD deployment to Google GKE
+  - name: abbott-platform-info-botapp-deploy-gke-prod
+    type: deploy
+    method: upgrade
+    # workflow: parallel
+    # stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
+    steps:
+      - IN: abbott-platform-info-botapp-deploy-gke-test
+        switch: off
+      - IN: abbott-platform-info-botapp-params-gke
+      - IN: abbott-platform-info-botapp-params-gke-prod
+      - IN: abbott-platform-info-botapp-img-options-gke-prod
+      - IN: abbott-platform-info-botapp-replicas-gke-prod
+      - IN: abbott-platform-info-botapp-cluster-gke
+      - TASK: managed
+    flags:
+      - gke-loadbalancer
+
+# Create external loadBalancer entrypoint for prod service
+  - name: abbott-platform-info-botapp-service-gke-prod
+    type: provision
+    steps:
+      - IN: abbott-platform-info-botapp-service-prod
+      - IN: abbott-platform-info-botapp-deploy-gke-prod
+      - TASK: managed
+    flags:
+      - gke-loadbalancer

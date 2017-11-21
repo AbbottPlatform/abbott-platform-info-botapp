@@ -25,7 +25,8 @@ var abbottConfig = {
   
 const abbottFramework = new AbbottFramework(abbottConfig);
 
+let version = process.env.CI_VERSION || 'x';
 abbottFramework.start()
   .then(() => {
-    console.log('Abbott Framework Initialized!');
+    console.log(`Abbott Framework Initialized! (1.0.${version})`);
   });
