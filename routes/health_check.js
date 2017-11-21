@@ -8,5 +8,9 @@ module.exports = function (webserver, router) {
   server.use('/_ah/health', require('express-healthcheck')());
   server.use('/healthz', require('express-healthcheck')());
 
+  router.get('/info', (req, res) => {
+    res.send('Environment: ' + process.env.ENVIRONMENT);
+  });
+
   logger.debug('route loaded!');
 };
