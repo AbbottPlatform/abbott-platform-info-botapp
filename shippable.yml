@@ -32,9 +32,9 @@ build:
   post_ci:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
-    - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
-    - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke.env
-    - echo "NLP_APIAI_TOKEN=$NLP_APIAI_TOKEN" >> $JOB_STATE/abbott-platform-info-botapp-params-gke.env
+    # - echo "versionName=$BRANCH.$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-img-gke.env
+    # - echo "CI_VERSION=$BUILD_NUMBER" > $JOB_STATE/abbott-platform-info-botapp-params-gke.env
+    # - echo "NLP_APIAI_TOKEN=$NLP_APIAI_TOKEN" >> $JOB_STATE/abbott-platform-info-botapp-params-gke.env
 
 integrations:
   hub:
