@@ -181,7 +181,7 @@ jobs:
 # deployment to Google GKE
   - name: abbott-platform-info-botapp-deploy-gke
     type: deploy
-    method: blue-green
+    method: blueGreen
     # method: upgrade
     # method: replace
     # workflow: parallel
