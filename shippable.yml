@@ -182,9 +182,9 @@ jobs:
 # deployment to Google GKE
   - name: abbott-platform-info-botapp-deploy-gke
     type: deploy
-    method: blueGreen
-    stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
-    # method: upgrade
+    # method: blueGreen
+    # stabilityDuration: 60 # The amount of time in seconds (0-300) that a new service created in a blueGreen deployment should be stable before marking the deployment as successful
+    method: upgrade
     # method: replace
     # workflow: parallel
     steps:
