@@ -89,7 +89,7 @@ resources:
       memory: 64
       # cpuShares: 1
       portMappings:
-        - 0:80
+        - 80:80
       publishAllPorts : true
       labels:   # these labels will be used by the loadBalancer resource
         app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
