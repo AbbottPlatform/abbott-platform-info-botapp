@@ -9,7 +9,10 @@ module.exports = function (webserver, router) {
   server.use('/healthz', require('express-healthcheck')());
 
   router.get('/info', (req, res) => {
-    res.send('Environment: ' + process.env.ENVIRONMENT);
+    res.send({
+      'environment': process.env.ENVIRONMENT,
+      'version': process.env.ABBOTT_APP_VERSION
+    });
   });
 
   logger.debug('route loaded!');
