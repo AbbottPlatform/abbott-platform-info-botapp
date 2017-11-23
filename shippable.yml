@@ -89,7 +89,7 @@ resources:
       memory: 64
       # cpuShares: 1
       portMappings:
-        - "8080-8100:80/tcp"
+        - "80:80/tcp"
       publishAllPorts : true
       labels:   # these labels will be used by the loadBalancer resource
         app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
@@ -134,7 +134,7 @@ resources:
           protocol: TCP
           # port: 80
           # nodePort: 80
-          # targetPort: 80
+          targetPort: 80
       selector:  # these must match labels set on your image (see dockerOptions)
         app: abbott-platform-info-botapp-node-gcr-deploy-gke-loadbalancer
         env: prod
