@@ -10,6 +10,7 @@ if (fs.existsSync(__dirname + '/.env')) {
 }  
 
 const { AbbottFramework } = require('@abbott-platform/abbott-framework');
+const AppContext = require('./appContext');
 
 var abbottConfig = {
   botName: 'abbott-platform-info-botapp',
@@ -22,8 +23,10 @@ var abbottConfig = {
     ]
   }
 };
+
+const appContext = new AppContext();
   
-const abbottFramework = new AbbottFramework(abbottConfig);
+const abbottFramework = new AbbottFramework(abbottConfig, appContext);
 
 let version = process.env.CI_VERSION || 'x';
 abbottFramework.start()
