@@ -26,7 +26,7 @@ var abbottConfig = {
 const abbottFramework = new AbbottFramework(abbottConfig);
 
 let version = process.env.CI_VERSION || 'x';
-process.env.ABBOTT_APP_VERSION = `1.1.${version}`;
+process.env.ABBOTT_APP_VERSION = `1.2.${version}`;
 
 abbottFramework.start()
   .then(() => {
